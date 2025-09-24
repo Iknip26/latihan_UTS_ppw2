@@ -4,15 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-//return type View
 use Illuminate\View\View;
-use App\Models\Post;
-
-//return type redirectResponse
 use Illuminate\Http\RedirectResponse;
-
-//import Facade "Storage"
 use Illuminate\Support\Facades\Storage;
+
+
 
 class PostController extends Controller
 {
@@ -23,11 +19,8 @@ class PostController extends Controller
      */
     public function index(): View
     {
-        //get posts
-        $posts = Post::latest()->paginate(5);
-
-        //render view with posts
-        return view('posts.index', compact('posts'));
+        $post = Posts::latest()->paginate(5);
+        return view('posts.index', compact('data?'));
     }
 
     /**
@@ -49,7 +42,6 @@ class PostController extends Controller
 
     public function store(Request $request): RedirectResponse
     {
-        //validate form
         $this->validate($request, [
             'image'     => 'required|image|mimes:jpeg,jpg,png|max:2048',
             'title'     => 'required|min:5',
@@ -79,10 +71,7 @@ class PostController extends Controller
      */
     public function show($id): View
     {
-        //get post by ID
         $post = Post::findOrFail($id);
-
-        //render view with post
         return view('posts.show', compact('post'));
     }
 
