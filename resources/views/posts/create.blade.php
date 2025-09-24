@@ -1,11 +1,19 @@
 @extends('partial.layout')
 
 
-{{-- @section('content') --}}
+@section('content')
 
     <div class="container mt-5 mb-5">
         <h5 style="color: #333; font-size: 30px; font-weight:800; ">TAMBAH DATA</h5>
 
+
+        @if (count($errors) > 0)
+            <ul class="alert alert-danger">
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        @endif
         <div class="row">
             <div class="col-md-12">
                 <div class="card border-0 shadow-sm rounded">
@@ -64,7 +72,7 @@
     </div>
 
     @stack('styles')
-    
+
 @endsection
 
 <style>

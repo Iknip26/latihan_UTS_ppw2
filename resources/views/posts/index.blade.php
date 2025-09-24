@@ -1,7 +1,7 @@
 @extends('partial.layout')
 
 @section('content')
-    @include('partial.searchbarrrrr')
+    @include('partial.searchbar')
 
     <div class="container mt-5">
         <div class="row">
@@ -11,6 +11,10 @@
                     </h5>
                     <hr>
                 </div>
+
+                @if (Session::has('pesan'))
+                    <div class="alert alert-success">{{ Session::get('pesan') }}</div>
+                @endif
                 <div class="card border-0 shadow-sm rounded">
                     <div class="card-body">
                         <a href="{{ route('posts.create') }}" class="btn btn-md btn-success mb-3">TAMBAH POST</a>
@@ -35,7 +39,7 @@
                                         <td class="text-center">
                                             <form onsubmit="return confirm('Apakah Anda Yakin ?');"
                                                 action="{{ route('posts.destroy', $post->id) }}" method="POST">
-                                                <a href="{{ route('posts.showww', $post->id) }}"
+                                                <a href="{{ route('posts.show', $post->id) }}"
                                                     class="btn btn-sm btn-dark">SHOW</a>
                                                 <a href="{{ route('posts.edit', $post->id) }}"
                                                     class="btn btn-sm btn-primary">EDIT</a>
